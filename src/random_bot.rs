@@ -59,4 +59,12 @@ impl<R: Rng> Bot for RandomBot<R> {
         // return the selected move:
         selected_move
     }
+
+    fn reset(&mut self) {
+        self.board = Board::new();
+    }
+
+    fn evaluate_board(&self) -> f32 {
+        0.0
+    }
 }
