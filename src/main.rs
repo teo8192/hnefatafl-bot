@@ -1,10 +1,13 @@
 use hnefatafl_core::{Board, Turn};
 
+mod random_bot;
 mod bot;
 
+use bot::Bot;
+
 fn main() {
-    let mut bot1 = bot::Bot::new(hnefatafl_core::Board::new());
-    let mut bot2 = bot::Bot::new(hnefatafl_core::Board::new());
+    let mut bot1 = random_bot::RandomBot::new();
+    let mut bot2 = random_bot::RandomBot::new();
 
     let mut board = Board::new();
 
@@ -15,12 +18,13 @@ fn main() {
             bot2.get_move()
         };
 
-        println!("Move: {:?}", mv);
+        // println!("Move: {:?}", mv);
 
-        board.do_move(&mv);
+        let cm = board.do_move(&mv).unwrap();
         bot1.do_move(&mv);
         bot2.do_move(&mv);
 
+        println!("{:?}", cm);
         println!("{}", board);
     }
 }
