@@ -51,6 +51,10 @@ impl<R: Rng> Bot for RandomBot<R> {
     fn get_move(&self) -> Move {
         let moves = self.board.available_moves();
 
+        if moves.is_empty() {
+            panic!("ChooseFirstMoveBot: No moves available!");
+        }
+
         // select one of the moves:
         let n = self.rng.lock().unwrap().gen_range(0..moves.len());
 
